@@ -118,7 +118,7 @@ public class HelloServlet extends HttpServlet {
           sbuf.append("<p>Remote Address: " + request.getRemoteAddr() + "</p>");
           // Generate a random number upon each request
           sbuf.append("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
-          sbuf.append("<form method=POST name=javaHostForm action=''>");
+          sbuf.append("<form method=GET name=javaHostForm action=''>");
           sbuf.append("<br><br>ssl (Y/N) <input type=text name=ssl value=\"Y\"/> ");        
           sbuf.append("domain (www.google.com) <input type=text name=domain/> ");         
           sbuf.append("port (443) <input type=text name=port/> ");        
