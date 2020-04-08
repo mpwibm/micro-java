@@ -21,10 +21,76 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair; 
 import org.apache.http.util.EntityUtils;  
 import java.io.IOException;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 @Path("/")
 public class HelloResource {
 
+@SuppressWarnings("serial")
+@WebServlet("/HelloWorld")
+public class HelloServlet extends HttpServlet {
+
+   @Override
+   public void doGet(HttpServletRequest request, HttpServletResponse response)
+               throws IOException, ServletException {
+                 String http_or_https = request.getParameter("ssl");
+                 String domain = request.getParameter("domain");
+                 String port = request.getParameter("port");
+                 String uri = request.getParameter("uri");
+                 String queryString = request.getParameter("queryString");
+                 // Set the response message's MIME type
+
+      response.setContentType("text/html;charset=UTF-8");
+      // Allocate a output writer to write the response message into the network socket
+
+      PrintWriter out = response.getWriter();
+      StringBuffer sbuf = new StringBuffer("");
+
+      //String message = null;
+      // Write the response message, in an HTML page
+
+      try {
+          sbuf.append("<!DOCTYPE html>");
+          sbuf.append("<html><head>");
+          sbuf.append("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+          sbuf.append("<title>MUFG Java Server Host Demo</title></head>");
+          sbuf.append("<body>");
+          sbuf.append("<h1>MUFG Java Server Host Demo</h1>");  // says Hello
+          // Echo client's request information
+          sbuf.append("<p>Request URI: " + request.getRequestURI() + "</p>");
+          sbuf.append("<p>Protocol: " + request.getProtocol() + "</p>");
+          sbuf.append("<p>PathInfo: " + request.getPathInfo() + "</p>");
+          sbuf.append("<p>Remote Address: " + request.getRemoteAddr() + "</p>");
+
+          // Generate a random number upon each request
+
+          sbuf.append("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
+          sbuf.append("<form method=POST name=javaHostForm action=''>");
+          sbuf.append("<br><br>https (Y/N) <input type=text name=ssl/> ");        
+          sbuf.append("domain (www.google.com) <input type=text name=domain/> ");        
+          sbuf.append("port (443) <input type=text name=port/> ");        
+          sbuf.append("uri (/uri) <input type=text name=uri/> ");        
+          sbuf.append("query string (?key1=val1&key2=val2) <input type=text name=queryString/> ");         
+          sbuf.append("<input type=submit name=submit/>");        
+          // sbuf.append("</form></head></html>" + msg);                
+          sbuf.append("</form></head></html>");
+          sbuf.append("</body>");
+          sbuf.append("</html>");
+          //message = sbuf.toString();   
+
+          System.out.println("TESTING - HTTP GET URI SERVICE");
+          out.println(sbuf.toString());
+
+      } finally {
+
+         out.close();  // Always close the output writer
+
+      }
+   }
+
+}
     @GET
     @Path("/hello")
     @Produces("text/plain")
