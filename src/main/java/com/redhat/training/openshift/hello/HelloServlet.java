@@ -92,7 +92,7 @@ public class HelloServlet extends HttpServlet {
                        if (method == "GET") {
                            msg = obj.sendGet(urlURI, protocol, search);
                        } else {
-                           msg = obj.sendGet(urlURI, protocol);
+                           msg = obj.sendGet(urlURI, protocol, search);
                        }
                     } catch (Exception e) {
                        // System.out.println(e.printStackTrace());
