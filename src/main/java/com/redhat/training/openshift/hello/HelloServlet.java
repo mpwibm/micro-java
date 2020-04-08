@@ -274,19 +274,19 @@ public class HelloServlet extends HttpServlet {
 
                     }
 
-                    sbuf.append("<br><br>ssl (Y/N) <input type=text name=ssl value=\"Y\"/> ");       
+                    sbuf.append("<br><br>ssl (Y/N) <input type=text name=ssl value=\"Y\" /> ");       
 
-                    sbuf.append("<br>domain (www.google.com) <input type=text name=domain/> ");        
+                    sbuf.append("<br>domain (www.google.com) <input type=text name=domain /> ");        
 
-                    sbuf.append("port (443) <input type=text name=port/> ");       
+                    sbuf.append("port (443) <input type=text name=port /> ");       
 
-                    sbuf.append("<br>uri (/uri) <input type=text name=uri/> ");       
+                    sbuf.append("<br>uri (/uri) <input type=text name=uri /> ");       
 
-                    sbuf.append("<br>query string (?key1=val1&key2=val2) <input type=text name=queryString/> ");        
+                    sbuf.append("<br>query string (?key1=val1&key2=val2) <input type=text name=queryString /> ");        
 
-                    sbuf.append("<br>method (GET or POST) <input type=text name=method value=\"GET\"/> ");       
+                    sbuf.append("<br>method (GET or POST) <input type=text name=method value=\"GET\" /> ");       
 
-                    sbuf.append("<input type=submit name=submit/>");       
+                    sbuf.append("<input type=submit name=submit />");       
 
                     sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
 
