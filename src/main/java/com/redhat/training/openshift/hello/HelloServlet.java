@@ -64,7 +64,7 @@ public class HelloServlet extends HttpServlet {
       }
 
       String urlURI = domain;
-      String search = "search string";
+      String search = "los_angeles";
       // Write the response message, in an HTML page
 
       try {
@@ -90,7 +90,7 @@ public class HelloServlet extends HttpServlet {
                        System.out.println("Testing Case 1 - Send Http GET request");
 
                        if (method == "GET") {
-                           msg = obj.sendGet(urlURI, protocol);
+                           msg = obj.sendGet(urlURI, protocol, search);
                        } else {
                            msg = obj.sendGet(urlURI, protocol);
                        }
