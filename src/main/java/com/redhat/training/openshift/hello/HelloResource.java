@@ -66,7 +66,7 @@ public class HelloResource {
               String greeting = "";
 
         if (message == null) {
-          greeting = "Hello from host "+hostname+"\n";
+          greeting = "App Red from Hostname: "+hostname+ "\n";
         } else {
           greeting = "Hello from host ["+hostname+"].\n";
           greeting += "Message received = "+message+"\n";
@@ -83,7 +83,7 @@ public class HelloResource {
         } finally {
            obj.close();
         }
-        StringBuffer sbuf = new StringBuffer("<html><head><form method=POST name=javaHostForm action=''>" + msg);
+        StringBuffer sbuf = new StringBuffer("<html><head><form method=POST name=javaHostForm action=''>");
         sbuf.append("<br><br>https (Y/N) <input type=text name=ssl/> ");         
         sbuf.append("domain (www.google.com) <input type=text name=domain/> ");         
         sbuf.append("port (443) <input type=text name=port/> ");         
@@ -91,7 +91,7 @@ public class HelloResource {
         sbuf.append("<br><br>For action <input type=text name=formAction/>");         
         sbuf.append("<br><br>For action <input type=text name=formAction/>");         
         sbuf.append("<input type=submit name=submit/>");         
-        sbuf.append("</form></head></html>");                 
+        sbuf.append("</form></head></html>" + msg);                 
         message = sbuf.toString();    
         System.out.println("TESTING - HTTP GET URI SERVICE");
         return Response.status(200).entity(greeting + "\n" + " URL : " + urlURI + "\n" + "\n" + message).build();
