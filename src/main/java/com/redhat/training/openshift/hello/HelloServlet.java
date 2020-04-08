@@ -28,10 +28,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-// import com.redhat.training.openshift.hello.HelloResource.HttpClientExample;
 
-// @Path("/")
-// public class HelloResource {
 @SuppressWarnings("serial")
 @WebServlet("/JavaServerDemo")
 public class HelloServlet extends HttpServlet {
@@ -59,7 +56,8 @@ public class HelloServlet extends HttpServlet {
       //String message = null;
 
       if (domain == null || domain.equals("")) {
-         domain = "bbk.unionbank.com/users/ub44203/";
+         // domain = "bbk.unionbank.com/users/ub44203/";
+         domain = "www.google.com";
          sbuf.append("hard coding domain to " + domain + "<br>");
       } else {
          sbuf.append("domain pulled from request = " + domain + "<br>");
@@ -143,11 +141,11 @@ public class HelloServlet extends HttpServlet {
              private void close() throws IOException {
                     httpClient.close();
              }
-             private String sendGet(String URL, String protocol) throws Exception {
+             private String sendGetnew(String URL, String protocol, String search) throws Exception {
                     HttpGet request = new HttpGet(protocol + URL);
                     // add request headers
-                    // request.addHeader("custom-key", search);
-                    // request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
+                    request.addHeader("custom-key", search);
+                    request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
                     String result = "";
                     String status = "";
                     try (CloseableHttpResponse response = httpClient.execute(request)) {
@@ -166,7 +164,7 @@ public class HelloServlet extends HttpServlet {
                     return "STATUS: \n" + status + "\n" + "RESULT: \n" + result;
              }
 
-             private String sendGetOrig(String URL, String ssl, String search) throws Exception {
+             private String sendGet(String URL, String ssl, String search) throws Exception {
                     String protocol = "";
                     if (ssl == "Y") {
                           protocol = "https://";
