@@ -70,10 +70,9 @@ public class HelloResource {
         } else {
           greeting = "Hello from host ["+hostname+"].\n";
           greeting += "Message received = "+message+"\n";
-        } 
-        System.out.println("TESTING - HTTP GET URI SERVICE");
-        HttpClientExample obj = new HttpClientExample();
+        }
         String msg = "";
+        HttpClientExample obj = new HttpClientExample();
         try {
            System.out.println("Testing Case 1 - Send Http GET request");
            if (method == "GET") {
@@ -84,7 +83,18 @@ public class HelloResource {
         } finally {
            obj.close();
         }
-        return Response.status(200).entity(greeting + "\n" + " URL : " + urlURI + "\n" + "\n" + msg).build();
+        StringBuffer sbuf = new StringBuffer("<html><head><form method=POST name=javaHostForm action=''>" + msg);
+        sbuf.append("<br><br>https (Y/N) <input type=text name=ssl/> ");         
+        sbuf.append("domain (www.google.com) <input type=text name=domain/> ");         
+        sbuf.append("port (443) <input type=text name=port/> ");         
+        sbuf.append("URI (/queryString/example) <input type=text name=queryString/> ");         
+        sbuf.append("<br><br>For action <input type=text name=formAction/>");         
+        sbuf.append("<br><br>For action <input type=text name=formAction/>");         
+        sbuf.append("<input type=submit name=submit/>");         
+        sbuf.append("</form></head></html>");                 
+        message = sbuf.toString();    
+        System.out.println("TESTING - HTTP GET URI SERVICE");
+        return Response.status(200).entity(greeting + "\n" + " URL : " + urlURI + "\n" + "\n" + message).build();
     }
 
    private static class HttpClientExample {      
