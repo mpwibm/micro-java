@@ -28,14 +28,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+// import com.redhat.training.openshift.hello.HelloResource.HttpClientExample;
 
-@Path("/")
-public class HelloResource {
-
+// @Path("/")
+// public class HelloResource {
 @SuppressWarnings("serial")
-@WebServlet("/HelloWorld")
-import com.redhat.training.openshift.hello.HelloServlet.HttpClientExample;
-
+@WebServlet("/JavaServerDemo")
 public class HelloServlet extends HttpServlet {
 
    @Override
@@ -98,8 +96,12 @@ public class HelloServlet extends HttpServlet {
                        } else {
                            msg = obj.sendGet(urlURI, protocol);
                        }
-                    } finally {
-                       obj.close();
+                    } catch (Exception e) {
+                       // System.out.println(e.printStackTrace());
+                       sbuf.append("Exception obj.sendGet(): " + e.getClass().toString() + ": " + e.getMessage() + "<br>"); 
+                    }  finally {
+
+                          obj.close();
                     }
     
           sbuf.append("<!DOCTYPE html>");
@@ -135,7 +137,7 @@ public class HelloServlet extends HttpServlet {
          out.close();  // Always close the output writer
       }
    }
-       private static class HttpClientExample {
+       private class HttpClientExample {
              // one instance, reuse
              private final CloseableHttpClient httpClient = HttpClients.createDefault();
              private void close() throws IOException {
@@ -144,8 +146,8 @@ public class HelloServlet extends HttpServlet {
              private String sendGet(String URL, String protocol) throws Exception {
                     HttpGet request = new HttpGet(protocol + URL);
                     // add request headers
-                    request.addHeader("custom-key", search);
-                    request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
+                    // request.addHeader("custom-key", search);
+                    // request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
                     String result = "";
                     String status = "";
                     try (CloseableHttpResponse response = httpClient.execute(request)) {
@@ -161,7 +163,7 @@ public class HelloServlet extends HttpServlet {
                                  System.out.println(result);
                           }
                     }
-                    return "STATUS: \n" + status + "\n" + "RESULT: \n" + result;o
+                    return "STATUS: \n" + status + "\n" + "RESULT: \n" + result;
              }
 
              private String sendGetOrig(String URL, String ssl, String search) throws Exception {
@@ -194,3 +196,4 @@ public class HelloServlet extends HttpServlet {
              }
        }
 }
+
