@@ -34,11 +34,7 @@ import org.apache.http.impl.client.HttpClients;
 
 import org.apache.http.util.EntityUtils;
 
-import java.util.Base64.Encoder;
-
-import java.util.Base64.Decoder;
-
- 
+import java.util.Base64.*;
 
 @SuppressWarnings("serial")
 
@@ -380,7 +376,7 @@ public class HelloServlet extends HttpServlet {
 
                     } else {
 
-                          uri = Base64.Encoder.encodeToString(uri.getBytes());
+                        // uri = java.util.Base64.getEncoder().encodeToString(uri.getBytes());
 
                         urlURI = protocol + URL + uri;
 
@@ -388,13 +384,13 @@ public class HelloServlet extends HttpServlet {
 
                     if (queryString != null && !queryString.trim().equals("")) {
 
-                        if (!queryString.startsWith("&")) {
+                        if (!queryString.startsWith("?")) {
 
-                          urlURI += "&";
+                          urlURI += "?";
 
                         }
 
-                        queryString = Base64.Encoder.encodeToString(queryString.getBytes());
+                        // queryString = java.util.Base64.getEncoder().encodeToString(queryString.getBytes());
 
                         urlURI += queryString;
 
