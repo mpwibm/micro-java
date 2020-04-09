@@ -78,11 +78,14 @@ public class HelloServlet extends HttpServlet {
              try {
                     String hostname = System.getenv().getOrDefault("HOSTNAME", "unknown");
                     String message = System.getenv().getOrDefault("APP_MSG", null);
+                    String namespace = System.getenv().getOrDefault("KUBERNETES_NAMESPACE", null);
+                    String serviceip = System.getenv().getOrDefault("KUBERNETES_SERVICE_HOST", null); 
+                    String podip = System.getenv().getOrDefault("HELLO_SERVICE_HOST", null);
                     String greeting = "";
                     if (message == null) {
-                          greeting = "App Red from Hostname: "+hostname+ "\n";
+                          greeting = "App Red from Hostname: ["+hostname+"].\n" + "Namespace: ["+namespace+].\n"+ "Service Host: ["+serviceip+].\n" + "Pod Host: ["+podip+].\n";
                     } else {
-                          greeting = "Hello from host ["+hostname+"].\n";
+                          greeting = "App Red from Hostname ["+hostname+"].\n" + "Namespace ;
                           greeting += "Message received = "+message+"\n";
                     }
                     String egressResponse = "";
