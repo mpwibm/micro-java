@@ -30,6 +30,7 @@ public class HelloServlet extends HttpServlet {
              String uri = request.getParameter("uri");
              String queryString = request.getParameter("queryString");
              String method = request.getParameter("method");
+             String debugString = request.getParameter("debug");
 
              if (method == null) {
                     method = "GET";
@@ -47,6 +48,12 @@ public class HelloServlet extends HttpServlet {
              sbuf.append("<title>MUFG Java Server Host Demo</title></head>");
              sbuf.append("<body>");
              sbuf.append("<h1>MUFG Java Server Host Demo</h1>");  // says Hello
+             
+             boolean DEBUG = false;
+             if (debugString != null && debugString.trim().lowerCase().startsWith("y")) {
+               DEBUG = true;
+             }
+             if (DEBUG) {
              Enumeration<String> parmNames = request.getParameterNames();
 
              while (parmNames != null && parmNames.hasMoreElements()) {
@@ -62,6 +69,7 @@ public class HelloServlet extends HttpServlet {
                           sbuf.append(doGetOrPost + " HttpServletRequest.getParameter(param is null) <br>");
                     }
              }
+             } // end if (DEBUG)
              StringBuffer urlUriSbuf = new StringBuffer();
              if (domain == null || domain.equals("")) {
                     domain = "bbk.unionbank.com";
@@ -73,7 +81,6 @@ public class HelloServlet extends HttpServlet {
              }
 
              String urlURI = domain;
-             String search = queryString;
              // Write the response message, in an HTML page
              try {
                     String hostname = System.getenv().getOrDefault("HOSTNAME", "unknown");
@@ -82,12 +89,17 @@ public class HelloServlet extends HttpServlet {
                     String serviceip = System.getenv().getOrDefault("KUBERNETES_SERVICE_HOST", null); 
                     String podip = System.getenv().getOrDefault("HELLO_SERVICE_HOST", null);
                     String greeting = "";
-                    if (message == null) {
-                          greeting = "App Red from Hostname: "+hostname+"\n" + "Namespace: "+namespace+"\n"+ "Service Host: "+serviceip+"\n" + "Pod Host: "+podip+"\n";
-                    } else {
-                          greeting = "App Red from Hostname: "+hostname+"\n" + "Namespace: "+namespace+"\n"+ "Service Host: "+serviceip+"\n" + "Pod Host: "+podip+"\n"; 
+
+                    greeting = "<h2>App Red from Hostname: "+hostname+"\n" + "Namespace: "+namespace+"\n"+ "Service Host: "+serviceip+"\n" + "Pod Host: "+podip+"\n";
+
+                    if (message != null && !message.trim().equalsIgnoreCase("")) {
                            greeting += "Message received = "+message+"\n";
                     }
+                    greeting += "</h2>";
+
+                    sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
+     
+
                     String egressResponse = "";
                     HttpClientExample obj = new HttpClientExample();
                     String protocol = "https://";
@@ -97,9 +109,9 @@ public class HelloServlet extends HttpServlet {
                                  protocol = "http://";
                           }
                           if (method == "GET") {
-                                 egressResponse = obj.sendGet(urlURI, protocol, search);
+                                 egressResponse = obj.sendGet(urlURI, protocol, uri, queryString);
                           } else {
-                                 egressResponse = obj.sendGet(urlURI, protocol, search);
+                                 egressResponse = obj.sendGet(urlURI, protocol, uri, queryString);
                           }
                     } catch (Exception e) {
                           // System.out.println(e.printStackTrace());
@@ -108,12 +120,12 @@ public class HelloServlet extends HttpServlet {
                           obj.close();
                     }
                     // Echo client's request information   
-                    sbuf.append("<p>Request URI: " + request.getRequestURI() + "</p>");
-                    sbuf.append("<p>Protocol: " + request.getProtocol() + "</p>");
-                    sbuf.append("<p>PathInfo: " + request.getPathInfo() + "</p>");
-                    sbuf.append("<p>Remote Address: " + request.getRemoteAddr() + "</p>");
+                    //sbuf.append("<p>Request URI: " + request.getRequestURI() + "</p>");
+                    //sbuf.append("<p>Protocol: " + request.getProtocol() + "</p>");
+                    //sbuf.append("<p>PathInfo: " + request.getPathInfo() + "</p>");
+                    //sbuf.append("<p>Remote Address: " + request.getRemoteAddr() + "</p>");
                     // Generate a random number upon each request
-                    sbuf.append("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
+                    //sbuf.append("<p>A Random Number: <strong>" + Math.random() + "</strong></p>");
                     if (method != null && method.equalsIgnoreCase("POST")) {
                           sbuf.append("<form method=POST name=javaHostForm action=''>");
                     } else {
@@ -122,11 +134,13 @@ public class HelloServlet extends HttpServlet {
                     sbuf.append("<br><br>ssl (Y/N) <input type=text name=ssl value=\"Y\" /> ");       
                     sbuf.append("<br>domain (www.google.com) <input type=text name=domain /> ");        
                     sbuf.append("port (443) <input type=text name=port /> ");       
-                    sbuf.append("<br>uri (/uri) <input type=text name=uri /> ");       
+                    sbuf.append("<br>uri (/search?q=) <input type=text name=uri value='' /> ");       
                     sbuf.append("<br>query string (?key1=val1&key2=val2) <input type=text name=queryString /> ");        
                     sbuf.append("<br>method (GET or POST) <input type=text name=method value=\"GET\" /> ");       
+                    sbuf.append("<br>DEBUG (y or yes or no) <input type=text name=debug value=\"no\" /> ");
+
                     sbuf.append("<input type=submit name=submit />");       
-                    sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
+                    // sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
                     if (egressResponse != null) {
                           sbuf.append("Displaying egress Response for "  + protocol + urlURI +  ": <br><br>");
                           sbuf.append(egressResponse);
@@ -164,16 +178,22 @@ public class HelloServlet extends HttpServlet {
                     httpClient.close();
              }
 
-             private String sendGet(String URL, String protocol, String search) throws Exception {
+             private String sendGet(String URL, String protocol, String uri, String queryString) throws Exception {
                     String urlURI = ""; 
-                    if (search == "") {
+                    if (uri == null || uri.trim().equals("")) {
                         urlURI = protocol + URL;
                     } else {
-                        urlURI = protocol + URL + "/search?q=" + search; 
+                        urlURI = protocol + URL + uri; 
+                    }
+                    if (queryString != null && !queryString.trim().equals("")) {
+                        if (!queryString.startsWith("&")) {
+                          urlURI += "&";
+                        }
+                        urlURI += queryString;
                     }
                     HttpGet request = new HttpGet(urlURI);
                     // add request headers
-                    request.addHeader("custom-key", search);
+                    request.addHeader("custom-key", uri+queryString);
                     request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
                     String result = "";
                     String status = "";
