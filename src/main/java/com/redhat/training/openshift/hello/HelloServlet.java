@@ -165,7 +165,7 @@ public class HelloServlet extends HttpServlet {
              }
 
              private String sendGet(String URL, String protocol, String search) throws Exception {
-                    String urlURI = "" 
+                    String urlURI = ""; 
                     if (search == "") {
                         urlURI = protocol + URL;
                     } else {
