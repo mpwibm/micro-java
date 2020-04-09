@@ -1,6 +1,10 @@
 package com.redhat.training.openshift.hello;
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
 import java.io.IOException;
 
@@ -34,7 +38,15 @@ import org.apache.http.impl.client.HttpClients;
 
 import org.apache.http.util.EntityUtils;
 
+<<<<<<< HEAD
 
+=======
+import java.util.Base64.Encoder;
+
+import java.util.Base64.Decoder;
+
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
 @SuppressWarnings("serial")
 
@@ -42,9 +54,17 @@ import org.apache.http.util.EntityUtils;
 
 public class HelloServlet extends HttpServlet {
 
+<<<<<<< HEAD
 
 
           public String getParameterStr(HttpServletRequest request, String str, String defaultVal) {
+=======
+      
+
+          public String getParameterStr(HttpServletRequest request, String paramName, String defaultVal) {
+
+                String str = request.getParameter(paramName);
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
            if (str == null || str.trim().equalsIgnoreCase("")) {
 
@@ -56,16 +76,27 @@ public class HelloServlet extends HttpServlet {
 
           }
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
        public void doGetOrPost(HttpServletRequest request, HttpServletResponse response, String doGetOrPost)
 
                     throws IOException, ServletException {
 
+<<<<<<< HEAD
 
 
              String ssl = getParameterStr(request, "ssl", "Y");
 
+=======
+ 
+
+             String ssl = getParameterStr(request, "ssl", "Y");
+
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
              String domain = getParameterStr(request, "domain", "");
 
              String port = getParameterStr(request, "port", "");
@@ -78,7 +109,11 @@ public class HelloServlet extends HttpServlet {
 
              String debugString = getParameterStr(request, "debug", "no");
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
              // Set the response message's MIME type
 
@@ -104,7 +139,11 @@ public class HelloServlet extends HttpServlet {
 
              sbuf.append("<h1>MUFG Java Server Host Demo</h1>");  // says Hello
 
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
              boolean DEBUG = false;
 
@@ -118,7 +157,11 @@ public class HelloServlet extends HttpServlet {
 
              Enumeration<String> parmNames = request.getParameterNames();
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
              while (parmNames != null && parmNames.hasMoreElements()) {
 
@@ -166,7 +209,11 @@ public class HelloServlet extends HttpServlet {
 
              }
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
              String urlURI = domain;
 
@@ -186,11 +233,19 @@ public class HelloServlet extends HttpServlet {
 
                     String greeting = "";
 
+<<<<<<< HEAD
 
 
                     greeting = "<h2>Openshift Project (Namespace): "+namespace+"<br> POD Host name: "+hostname+"<br> Cluster IP / Service IP (for POD communication): "+serviceip+"<br> Pod IP / Container IP: "+podip+"<br>";
 
 
+=======
+ 
+
+                    greeting = "<h2>Openshift Project (Namespace): "+namespace+"<br> POD Host name: "+hostname+"<br> Cluster IP / Service IP (for POD communication): "+serviceip+"<br> Pod IP / Container IP: "+podip+"<br>";
+
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
                     if (message != null && !message.trim().equalsIgnoreCase("")) {
 
@@ -200,6 +255,7 @@ public class HelloServlet extends HttpServlet {
 
                     greeting += "</h2>";
 
+<<<<<<< HEAD
 
 
                     sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
@@ -207,6 +263,15 @@ public class HelloServlet extends HttpServlet {
 
 
 
+=======
+ 
+
+                    sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
+
+    
+
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
                     String egressResponse = "";
 
@@ -246,7 +311,11 @@ public class HelloServlet extends HttpServlet {
 
                     }
 
+<<<<<<< HEAD
                     // Echo client's request information
+=======
+                    // Echo client's request information  
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
                     //sbuf.append("<p>Request URI: " + request.getRequestURI() + "</p>");
 
@@ -270,6 +339,7 @@ public class HelloServlet extends HttpServlet {
 
                     }
 
+<<<<<<< HEAD
                     sbuf.append("<br><br>ssl (Y/N) <input type=text name=ssl value=\""+ ssl +"\" /> ");
 
                     sbuf.append("<br>domain (www.google.com) <input type=text name=domain value=\""+ domain +"\" /> ");
@@ -287,6 +357,25 @@ public class HelloServlet extends HttpServlet {
 
 
                     sbuf.append("<input type=submit name=submit />");
+=======
+                    sbuf.append("<br><br>ssl (Y/N) <input type=text name=ssl value=\""+ ssl +"\" /> ");      
+
+                    sbuf.append("<br>domain (www.google.com) <input type=text name=domain value=\""+ domain +"\" /> ");      
+
+                    sbuf.append("port (443) <input type=text name=port value=\""+ port +"\" /> ");      
+
+                    sbuf.append("<br>uri (/search?q=) <input type=text name=uri value=\""+ uri +"\" /> ");      
+
+                    sbuf.append("<br>query string (?key1=val1&key2=val2) <input type=text name=queryString value=\""+ queryString +"\" /> ");              
+
+                    sbuf.append("<br>method (GET or POST) <input type=text name=method value=\""+ method +"\" /> ");      
+
+                    sbuf.append("<br>DEBUG (y or yes or no) <input type=text name=debug value=\""+ DEBUG +"\" /> ");      
+
+ 
+
+                    sbuf.append("<input type=submit name=submit />");      
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
                     // sbuf.append("<br><br>Greeting: " + greeting+ "</form><br><br>");
 
@@ -304,7 +393,11 @@ public class HelloServlet extends HttpServlet {
 
                     sbuf.append("</body></html>");
 
+<<<<<<< HEAD
                     //message = sbuf.toString();
+=======
+                    //message = sbuf.toString(); 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
                     System.out.println("TESTING - HTTP GET URI SERVICE");
 
@@ -312,6 +405,7 @@ public class HelloServlet extends HttpServlet {
 
              } finally {
 
+<<<<<<< HEAD
 
 
                     out.close();  // Always close the output writer
@@ -325,6 +419,21 @@ public class HelloServlet extends HttpServlet {
        } // doGetOrPost
 
 
+=======
+ 
+
+                    out.close();  // Always close the output writer
+
+ 
+
+             }
+
+ 
+
+       } // doGetOrPost
+
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
        @Override
 
@@ -336,7 +445,11 @@ public class HelloServlet extends HttpServlet {
 
        } // doGet
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
        @Override
 
@@ -348,7 +461,11 @@ public class HelloServlet extends HttpServlet {
 
        } // doPost
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
        private class HttpClientExample {
 
@@ -362,7 +479,11 @@ public class HelloServlet extends HttpServlet {
 
              }
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
              private String sendGet(String URL, String protocol, String uri, String queryString) throws Exception {
 
@@ -374,6 +495,11 @@ public class HelloServlet extends HttpServlet {
 
                     } else {
 
+<<<<<<< HEAD
+=======
+                          uri = Encoder.encodeToString(uri.getBytes());
+
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
                         urlURI = protocol + URL + uri;
 
                     }
@@ -386,10 +512,22 @@ public class HelloServlet extends HttpServlet {
 
                         }
 
+<<<<<<< HEAD
+=======
+                        queryString = Encoder.encodeToString(queryString.getBytes());
+
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
                         urlURI += queryString;
 
                     }
 
+<<<<<<< HEAD
+=======
+                    System.out.println("sendGet(): urlURI: " + urlURI);
+
+ 
+
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
                     HttpGet request = new HttpGet(urlURI);
 
                     // add request headers
@@ -432,7 +570,11 @@ public class HelloServlet extends HttpServlet {
 
              }
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
 
              private String sendGetOrig(String URL, String ssl, String search) throws Exception {
 
@@ -492,4 +634,8 @@ public class HelloServlet extends HttpServlet {
 
        }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 787616edfe93a382ebaa86ce727ce331ffb105ee
