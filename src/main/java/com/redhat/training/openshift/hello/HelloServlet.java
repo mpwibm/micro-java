@@ -380,7 +380,7 @@ public class HelloServlet extends HttpServlet {
 
                     } else {
 
-                          uri = Encoder.encodeToString(uri.getBytes());
+                          uri = Base64.Encoder.encodeToString(uri.getBytes());
 
                         urlURI = protocol + URL + uri;
 
@@ -394,7 +394,7 @@ public class HelloServlet extends HttpServlet {
 
                         }
 
-                        queryString = Encoder.encodeToString(queryString.getBytes());
+                        queryString = Base64.Encoder.encodeToString(queryString.getBytes());
 
                         urlURI += queryString;
 
