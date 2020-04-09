@@ -165,10 +165,11 @@ public class HelloServlet extends HttpServlet {
              }
 
              private String sendGet(String URL, String protocol, String search) throws Exception {
+                    String urlURI = "" 
                     if (search == "") {
-                        urlURI =protocol + URL;
-                    else {
-                        urlURI =protocol + URL + "/search?q=" + search; 
+                        urlURI = protocol + URL;
+                    } else {
+                        urlURI = protocol + URL + "/search?q=" + search; 
                     }
                     HttpGet request = new HttpGet(urlURI);
                     // add request headers
