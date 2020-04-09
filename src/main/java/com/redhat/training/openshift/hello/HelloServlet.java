@@ -94,9 +94,9 @@ public class HelloServlet extends HttpServlet {
                                  protocol = "http://";
                           }
                           if (method == "GET") {
-                                 egressResponse = obj.sendGet(urlURI, protocol);
+                                 egressResponse = obj.sendGet(urlURI, protocol, search);
                           } else {
-                                 egressResponse = obj.sendGet(urlURI, protocol);
+                                 egressResponse = obj.sendGet(urlURI, protocol, search);
                           }
                     } catch (Exception e) {
                           // System.out.println(e.printStackTrace());
