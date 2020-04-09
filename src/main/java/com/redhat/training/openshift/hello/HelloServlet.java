@@ -83,10 +83,10 @@ public class HelloServlet extends HttpServlet {
                     String podip = System.getenv().getOrDefault("HELLO_SERVICE_HOST", null);
                     String greeting = "";
                     if (message == null) {
-                          greeting = "App Red from Hostname: ["+hostname+"].\n" + "Namespace: ["+namespace+].\n"+ "Service Host: ["+serviceip+].\n" + "Pod Host: ["+podip+].\n";
+                          greeting = "App Red from Hostname: "+hostname+"\n" + "Namespace: "+namespace+"\n"+ "Service Host: "+serviceip+"\n" + "Pod Host: "+podip+"\n";
                     } else {
-                          greeting = "App Red from Hostname ["+hostname+"].\n" + "Namespace ;
-                          greeting += "Message received = "+message+"\n";
+                          greeting = "App Red from Hostname: "+hostname+"\n" + "Namespace: "+namespace+"\n"+ "Service Host: "+serviceip+"\n" + "Pod Host: "+podip+"\n"; 
+                           greeting += "Message received = "+message+"\n";
                     }
                     String egressResponse = "";
                     HttpClientExample obj = new HttpClientExample();
