@@ -386,14 +386,14 @@ public class HelloServlet extends HttpServlet {
 
                         if (!queryString.startsWith("?")) {
 
-                          urlURI += "?";
+                          urlURI += "?" + queryString.trim();
 
-                        }
+                        } else {
 
                         // queryString = java.util.Base64.getEncoder().encodeToString(queryString.getBytes());
 
-                        urlURI += queryString;
-
+                        urlURI += queryString.trim();
+                        }
                     }
 
                     System.out.println("sendGet(): urlURI: " + urlURI);
