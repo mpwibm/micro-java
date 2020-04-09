@@ -50,7 +50,7 @@ public class HelloServlet extends HttpServlet {
              sbuf.append("<h1>MUFG Java Server Host Demo</h1>");  // says Hello
              
              boolean DEBUG = false;
-             if (debugString != null && debugString.trim().lowerCase().startsWith("y")) {
+             if (debugString != null && debugString.trim().toLowerCase().startsWith("y")) {
                DEBUG = true;
              }
              if (DEBUG) {
