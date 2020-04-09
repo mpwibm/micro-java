@@ -73,7 +73,7 @@ public class HelloServlet extends HttpServlet {
              }
 
              String urlURI = domain;
-             String search = "search string";
+             String search = queryString;
              // Write the response message, in an HTML page
              try {
                     String hostname = System.getenv().getOrDefault("HOSTNAME", "unknown");
@@ -165,7 +165,12 @@ public class HelloServlet extends HttpServlet {
              }
 
              private String sendGet(String URL, String protocol, String search) throws Exception {
-                    HttpGet request = new HttpGet(protocol + URL);
+                    if (search == "") {
+                        urlURI =protocol + URL;
+                    else {
+                        urlURI =protocol + URL + "/search?q=" + search; 
+                    }
+                    HttpGet request = new HttpGet(urlURI);
                     // add request headers
                     request.addHeader("custom-key", search);
                     request.addHeader(HttpHeaders.USER_AGENT, "Googlebot");
