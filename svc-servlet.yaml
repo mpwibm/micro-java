@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    fabric8.io/git-branch: master
+    fabric8.io/git-commit: 8af9ac825460303b541929fcfd135f6253241a1c
+    fabric8.io/git-url: https://github.com/mpwibm/micro-java.git
+    prometheus.io/port: "9779"
+    prometheus.io/scrape: "true"
+  creationTimestamp: "2020-04-10T19:42:05Z"
+  labels:
+    app: hello
+    expose: "true"
+    group: com.redhat.training.openshift
+    provider: fabric8
+    version: "1.0"
+  name: hello
+  namespace: javaservlet
+  resourceVersion: "28829427"
+  selfLink: /api/v1/namespaces/javaservlet/services/hello
+  uid: 5b389e6f-7b63-11ea-924a-02e5d704b7db
+spec:
+  clusterIP: 172.30.137.244
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hello
+    group: com.redhat.training.openshift
+    provider: fabric8
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
